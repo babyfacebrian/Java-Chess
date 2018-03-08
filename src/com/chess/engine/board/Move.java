@@ -285,14 +285,13 @@ public abstract class Move {
 
     public static class MoveFactory {
 
-
         private MoveFactory(){
             throw new RuntimeException("CANT DO THAT");
         }
 
         public static Move createMove(final Board board, final int currentCoordinate, final int destinationCoordinate){
-
             for(final Move move : board.getAllLegalMoves()){
+
                 if(move.getCurrentCoordinate() == currentCoordinate && move.getDestinationCoordinate() == destinationCoordinate){
                     return move;
 

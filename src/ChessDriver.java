@@ -1,4 +1,3 @@
-
 import com.chess.engine.board.Board;
 import com.chess.GUI.Table;
 
