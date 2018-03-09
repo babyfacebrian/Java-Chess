@@ -8,6 +8,9 @@ import com.chess.engine.player.BlackPlayer;
 import com.chess.engine.player.WhitePlayer;
 import com.chess.engine.pieces.*;
 import com.chess.engine.player.Player;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -103,7 +106,7 @@ public class Board {
         }
 
         // return a collection of pieces from occupied tiles on the board
-        return Collections.unmodifiableList(activePieces);
+        return ImmutableList.copyOf(activePieces);
     }
 
     public Tile getTile(final int tileCoordinate){
@@ -178,9 +181,7 @@ public class Board {
     }
 
     public Iterable<Move> getAllLegalMoves() {
-        // Work around without guava to combine white and black legal moves
-        Stream<Move> combinedMoves = Stream.of(this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves()).flatMap(Collection::stream);
-        return combinedMoves.collect(Collectors.toList());
+        return Iterables.unmodifiableIterable(Iterables.concat(this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves()));
     }
 
     public static class Builder {

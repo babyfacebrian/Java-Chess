@@ -2,6 +2,9 @@
 
 package com.chess.engine.board;
 
+import java.util.List;
+import java.util.Map;
+
 public class BoardUtils {
 
     // column exceptions
@@ -30,6 +33,10 @@ public class BoardUtils {
     // tile totals
     public static final int NUM_TILES = 64;
     public static final int NUM_TILES_PER_ROW = 8;
+
+
+    public static final List<String> ALGEBRAIC_NOTATION = initAlgebreicNotation();
+    public static final Map<String, Integer> POSITION_TO_COORDINATE = initPositionToCoordinateMap();
 
 
     private static boolean[] initColumn(int columnNumber) {
@@ -66,4 +73,24 @@ public class BoardUtils {
     }
 
 
+    public static int getCoordinateAtPosition(final String position) {
+        return POSITION_TO_COORDINATE.get(position);
+
+    }
+
+    public static String getPositionAtCoordinate(final int coordinate) {
+        return ALGEBRAIC_NOTATION.get(coordinate);
+
+    }
+
+
+
+
+
+
 }
+
+
+
+
+

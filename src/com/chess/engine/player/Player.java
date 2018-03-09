@@ -5,6 +5,8 @@ import com.chess.engine.board.Move;
 import com.chess.engine.Alliance;
 import com.chess.engine.pieces.King;
 import com.chess.engine.pieces.Piece;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,12 +27,7 @@ public abstract class Player {
     Player(final Board board, final Collection<Move> legalMoves, final Collection<Move> opponentMoves){
         this.board = board;
         this.playerKing = establishKing();
-
-        //Guava workaround
-        Stream<Move> all = Stream.of(legalMoves, calculateKingCastles(legalMoves,opponentMoves)).flatMap(Collection::stream);
-        List<Move> allMoves = all.collect(Collectors.toList());
-
-        this.legalMoves = Collections.unmodifiableList(allMoves);
+        this.legalMoves = ImmutableList.copyOf(Iterables.concat(legalMoves, calculateKingCastles(legalMoves, opponentMoves)));
         this.isInCheck = !Player.calculateAttacksOnTile(this.playerKing.getPiecePosition(), opponentMoves).isEmpty();
     }
 
@@ -50,7 +47,7 @@ public abstract class Player {
                 attackMoves.add(move);
             }
         }
-        return Collections.unmodifiableList(attackMoves);
+        return ImmutableList.copyOf(attackMoves);
     }
 
     private King establishKing() {

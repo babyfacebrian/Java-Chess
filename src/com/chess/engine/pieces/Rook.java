@@ -7,6 +7,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.Alliance;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,8 +19,11 @@ public class Rook extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-8,-1, 1, 8};
 
     public Rook(int piecePosition, Alliance pieceAlliance) {
+        super(PieceType.ROOK, piecePosition, pieceAlliance, true);
+    }
 
-        super(PieceType.ROOK, piecePosition, pieceAlliance);
+    public Rook(int piecePosition, Alliance pieceAlliance, final boolean isFirstMove){
+        super(PieceType.ROOK, piecePosition, pieceAlliance, isFirstMove);
     }
 
     @Override
@@ -55,7 +59,7 @@ public class Rook extends Piece {
                 }
             }
         }
-        return Collections.unmodifiableList(legalMoves);
+        return ImmutableList.copyOf(legalMoves);
     }
 
     @Override

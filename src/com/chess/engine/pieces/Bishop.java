@@ -8,6 +8,8 @@ import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.Alliance;
+import com.google.common.collect.ImmutableList;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,8 +20,14 @@ public class Bishop extends Piece {
 
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-9, -7, 7, 9};
 
-    public Bishop(int piecePosition, Alliance pieceAlliance) {
-        super(PieceType.BISHOP, piecePosition, pieceAlliance);
+    public Bishop(final int piecePosition, final Alliance pieceAlliance) {
+
+        super(PieceType.BISHOP, piecePosition, pieceAlliance, true);
+    }
+
+    public Bishop(final int piecePosition, final Alliance pieceAlliance, final boolean isFirstMove) {
+
+        super(PieceType.BISHOP, piecePosition, pieceAlliance, isFirstMove);
     }
 
     @Override
@@ -55,7 +63,7 @@ public class Bishop extends Piece {
                 }
             }
         }
-        return Collections.unmodifiableList(legalMoves);
+        return ImmutableList.copyOf(legalMoves);
     }
 
     @Override
