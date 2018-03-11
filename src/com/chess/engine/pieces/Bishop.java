@@ -6,6 +6,7 @@ import com.chess.engine.board.Board;
 
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
+import com.chess.engine.board.Move.MajorAttackMove;
 import com.chess.engine.board.Tile;
 import com.chess.engine.Alliance;
 import com.google.common.collect.ImmutableList;
@@ -50,13 +51,12 @@ public class Bishop extends Piece {
 
                     if(!candidateDestinationTile.isTileOccupied()){
                         legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
-
                     }else{
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                         final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
 
                         if(this.pieceAlliance != pieceAlliance){
-                            legalMoves.add(new Move.AttackMove(board, this,candidateDestinationCoordinate,pieceAtDestination));
+                            legalMoves.add(new MajorAttackMove(board, this,candidateDestinationCoordinate,pieceAtDestination));
                         }
                         break;
                     }

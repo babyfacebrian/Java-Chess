@@ -10,17 +10,15 @@ import com.chess.engine.pieces.*;
 import com.chess.engine.player.Player;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Board {
 
     private final List<Tile> gameBoard;
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
+    private final Pawn EnPassantPawn;
 
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
@@ -32,7 +30,8 @@ public class Board {
         // Create the board and get all white and black pieces
         this.gameBoard = createGameBoard(builder);
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
-        this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);;
+        this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
+        this.EnPassantPawn = builder.EnPassantPawn;
 
         // Collect all legal moves for white and black pieces
         final Collection<Move> whiteStandardLegalMoves = calculateLegalMoves(this.whitePieces);
@@ -71,6 +70,10 @@ public class Board {
 
     public Player currentPlayer(){
         return this.currentPlayer;
+    }
+
+    public Pawn getEnPassantPawn() {
+        return this.EnPassantPawn;
     }
 
     public Collection<Piece> getBlackPieces() {
@@ -189,7 +192,7 @@ public class Board {
 
         Map<Integer, Piece> BoardConfig;
         Alliance nextMoveMaker;
-        Pawn diagonalPawn;
+        Pawn EnPassantPawn;
 
         public Builder(){
 
@@ -207,12 +210,11 @@ public class Board {
         }
 
         public Board build(){
-
             return new Board(this);
         }
 
-        public void setDiagonal(Pawn diagonal) {
-            this.diagonalPawn = diagonal;
+        public void setEnPassantPawn(Pawn diagonal) {
+            this.EnPassantPawn = diagonal;
         }
     }
 
