@@ -84,6 +84,10 @@ public class Board {
         return this.whitePieces;
     }
 
+    public Iterable<Piece> getAllPieces() {
+        return Iterables.unmodifiableIterable(Iterables.concat(this.whitePieces, this.blackPieces));
+    }
+
     private Collection<Move> calculateLegalMoves(final Collection<Piece> pieces) {
         final List<Move> legalMoves = new ArrayList<>();
 
@@ -114,7 +118,11 @@ public class Board {
 
     public Tile getTile(final int tileCoordinate){
 
-        return gameBoard.get(tileCoordinate);
+        return this.gameBoard.get(tileCoordinate);
+    }
+
+    public List<Tile> getGameBoard() {
+        return this.gameBoard;
     }
 
     private static List<Tile> createGameBoard(final Builder builder){
@@ -151,7 +159,7 @@ public class Board {
         builder.setPiece(new Bishop(5,Alliance.BLACK));
 
         builder.setPiece(new Queen(3,Alliance.BLACK));
-        builder.setPiece(new King(4,Alliance.BLACK));
+        builder.setPiece(new King(4,Alliance.BLACK,true,true));
 
         // While pieces
         builder.setPiece(new Pawn(48,Alliance.WHITE));
@@ -173,7 +181,7 @@ public class Board {
         builder.setPiece(new Bishop(61,Alliance.WHITE));
 
         builder.setPiece(new Queen(59,Alliance.WHITE));
-        builder.setPiece(new King(60,Alliance.WHITE));
+        builder.setPiece(new King(60,Alliance.WHITE,true,true));
 
         // Set White as first to move
         builder.setMoveMaker(Alliance.WHITE);

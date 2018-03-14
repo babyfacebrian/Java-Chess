@@ -50,7 +50,7 @@ public class WhitePlayer extends Player {
                            rookTile.getPiece().getPieceType().isRook()){
 
                        kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing,62,
-                                      (Rook)rookTile.getPiece(), rookTile.getTileCoodinate(), 61));
+                                      (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 61));
 
                    }
                }
@@ -68,7 +68,7 @@ public class WhitePlayer extends Player {
                         rookTile.getPiece().getPieceType().isRook()){
 
                     kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing, 58,
-                                   (Rook)rookTile.getPiece(), rookTile.getTileCoodinate(), 59));
+                                   (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 59));
                 }
             }
         }

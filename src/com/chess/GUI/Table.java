@@ -6,7 +6,6 @@ import com.chess.engine.board.Move;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
-import com.chess.engine.player.MoveStatus;
 import com.chess.engine.player.MoveTransition;
 import com.google.common.collect.Lists;
 
@@ -259,13 +258,13 @@ public class Table {
                         }else{
                             destinationTile = chessBoard.getTile(tileId);
                             final Move move = Move.MoveFactory.createMove(chessBoard,
-                                                                          sourceTile.getTileCoodinate(),
-                                                                          destinationTile.getTileCoodinate());
+                                                                          sourceTile.getTileCoordinate(),
+                                                                          destinationTile.getTileCoordinate());
 
                             final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
 
                             if(transition.getMoveStatus().isDone()){
-                                chessBoard = transition.getTransitionBoard();
+                                chessBoard = transition.getToBoard();
                                 moveLog.addMove(move);
                             }
                             sourceTile = null;

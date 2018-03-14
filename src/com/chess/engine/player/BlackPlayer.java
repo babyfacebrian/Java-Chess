@@ -11,7 +11,6 @@ import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
-import java.util.Collections;
 
 public class BlackPlayer extends Player {
     public BlackPlayer(final Board board, final Collection<Move> whiteStandardLegalMoves, final Collection<Move> blackStandardLegalMoves) {
@@ -50,7 +49,7 @@ public class BlackPlayer extends Player {
                             rookTile.getPiece().getPieceType().isRook()) {
 
                         kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing,6,
-                                       (Rook)rookTile.getPiece(), rookTile.getTileCoodinate(), 5));
+                                       (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 5));
 
                     }
                 }
@@ -68,7 +67,7 @@ public class BlackPlayer extends Player {
                         rookTile.getPiece().getPieceType().isRook()) {
 
                     kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing,2,
-                                   (Rook)rookTile.getPiece(), rookTile.getTileCoodinate(), 3));
+                                   (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 3));
                 }
             }
         }

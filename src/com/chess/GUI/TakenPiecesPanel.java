@@ -26,7 +26,7 @@ public class TakenPiecesPanel extends JPanel{
     private final JPanel southPanel;
 
     private static final Color PANEL_COLOR = Color.decode("0xFDF5E6");
-    private static final Dimension TAKEN_PIECES_DIMENSION = new Dimension(40,80);
+    private static final Dimension TAKEN_PIECES_DIMENSION = new Dimension(80,80);
     private static final EtchedBorder PANEL_BOARDER = new EtchedBorder(EtchedBorder.RAISED);
 
     public TakenPiecesPanel() {
@@ -83,11 +83,13 @@ public class TakenPiecesPanel extends JPanel{
         // Add Image to White taken pieces panel
         for(final Piece takenPiece : whiteTakenPieces){
             try {
-                final BufferedImage image = ImageIO.read(new File("art/alpha_pieces" +
-                                                         takenPiece.getPieceAlliance().toString().substring(0,1) + ".png"));
+                final BufferedImage image = ImageIO.read(new File("art/alpha_pieces/" +
+                                                         takenPiece.getPieceAlliance().toString().substring(0,1) +
+                                                         takenPiece.toString() + ".png"));
 
                 final ImageIcon icon = new ImageIcon(image);
-                final JLabel imageLabel = new JLabel();
+                final JLabel imageLabel = new JLabel(new ImageIcon(icon.getImage().getScaledInstance(
+                        icon.getIconWidth() - 40, icon.getIconWidth() - 40, Image.SCALE_SMOOTH)));
                 this.southPanel.add(imageLabel);
 
             }catch (IOException e){
@@ -98,11 +100,14 @@ public class TakenPiecesPanel extends JPanel{
         // Add image to Black taken pieces panel
         for(final Piece takenPiece : blackTakenPieces){
             try {
-                final BufferedImage image = ImageIO.read(new File("art/alpha_pieces" +
-                                                         takenPiece.getPieceAlliance().toString().substring(0,1) + ".png"));
+                final BufferedImage image = ImageIO.read(new File("art/alpha_pieces/" +
+                                                         takenPiece.getPieceAlliance().toString().substring(0,1) +
+                                                         takenPiece.toString() + ".png"));
 
                 final ImageIcon icon = new ImageIcon(image);
-                final JLabel imageLabel = new JLabel();
+                final JLabel imageLabel = new JLabel(new ImageIcon(icon.getImage().getScaledInstance(
+                        icon.getIconWidth() - 40, icon.getIconWidth() - 40, Image.SCALE_SMOOTH)));
+
                 this.northPanel.add(imageLabel);
 
             }catch (IOException e){
