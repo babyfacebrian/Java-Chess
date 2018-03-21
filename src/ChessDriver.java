@@ -9,7 +9,6 @@ public class ChessDriver {
         System.out.println(chess);
 
         Table table = new Table();
-
     }
 
 
